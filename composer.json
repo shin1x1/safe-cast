@@ -1,0 +1,17 @@
+{
+    "name": "shin1x1/safe-cast",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Shin1x1\\SafeCast\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "shin1x1",
+            "email": "shin1x1@gmail.com"
+        }
+    ],
+    "require": {}
+}
