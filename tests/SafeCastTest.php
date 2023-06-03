@@ -20,9 +20,9 @@ class SafeCastTest extends TestCase
 {
     /**
      * @test
-     * @dataProvider dataProvider_toInt
+     * @dataProvider dataProvider_tryInt
      */
-    public function toInt(?int $expected, mixed $value): void
+    public function tryInt(?int $expected, mixed $value): void
     {
         // Arrange && Act && Assert
         $this->assertSame($expected, SafeCast::tryInt($value));
@@ -31,7 +31,7 @@ class SafeCastTest extends TestCase
     /**
      * @return iterable<string, array{expected: ?int, value: mixed}>
      */
-    public static function dataProvider_toInt(): iterable
+    public static function dataProvider_tryInt(): iterable
     {
         yield '1' => ['expected' => 1, 'value' => 1];
         yield '1.0' => ['expected' => 1, 'value' => 1.0];
@@ -50,7 +50,7 @@ class SafeCastTest extends TestCase
     /**
      * @test
      */
-    public function toInt_with_resource_then_return_int(): void
+    public function tryInt_with_resource_then_return_int(): void
     {
         // Arrange && Act && Assert
         $this->assertIsInt(SafeCast::tryInt(fopen('php://memory', 'r')));
@@ -58,9 +58,9 @@ class SafeCastTest extends TestCase
 
     /**
      * @test
-     * @dataProvider dataProvider_toString
+     * @dataProvider dataProvider_tryString
      */
-    public function toString_(?string $expected, mixed $value): void
+    public function tryString_(?string $expected, mixed $value): void
     {
         // Arrange && Act && Assert
         $this->assertSame($expected, SafeCast::tryString($value));
@@ -69,7 +69,7 @@ class SafeCastTest extends TestCase
     /**
      * @return iterable<string, array{expected: ?string, value: mixed}>
      */
-    public static function dataProvider_toString(): iterable
+    public static function dataProvider_tryString(): iterable
     {
         yield '1' => ['expected' => '1', 'value' => 1];
         yield '1.0' => ['expected' => '1', 'value' => 1.0];
@@ -89,9 +89,9 @@ class SafeCastTest extends TestCase
 
     /**
      * @test
-     * @dataProvider dataProvider_toFloat
+     * @dataProvider dataProvider_tryFloat
      */
-    public function toFloat(?float $expected, mixed $value): void
+    public function tryFloat(?float $expected, mixed $value): void
     {
         // Arrange && Act && Assert
         $this->assertSame($expected, SafeCast::tryFloat($value));
@@ -100,7 +100,7 @@ class SafeCastTest extends TestCase
     /**
      * @return iterable<string, array{expected: ?float, value: mixed}>
      */
-    public static function dataProvider_toFloat(): iterable
+    public static function dataProvider_tryFloat(): iterable
     {
         yield '1' => ['expected' => 1.0, 'value' => 1];
         yield '1.0' => ['expected' => 1.0, 'value' => 1.0];
@@ -119,7 +119,7 @@ class SafeCastTest extends TestCase
     /**
      * @test
      */
-    public function toFloat_with_resource_return_float(): void
+    public function tryFloat_with_resource_return_float(): void
     {
         // Arrange && Act && Assert
         $this->assertIsFloat(SafeCast::tryFloat(fopen('php://memory', 'r')));
@@ -127,9 +127,9 @@ class SafeCastTest extends TestCase
 
     /**
      * @test
-     * @dataProvider dataProvider_toBool
+     * @dataProvider dataProvider_tryBool
      */
-    public function toBool(?bool $expected, mixed $value): void
+    public function tryBool(?bool $expected, mixed $value): void
     {
         // Arrange && Act && Assert
         $this->assertSame($expected, SafeCast::tryBool($value));
@@ -138,7 +138,7 @@ class SafeCastTest extends TestCase
     /**
      * @return iterable<string, array{expected: ?bool, value: mixed}>
      */
-    public static function dataProvider_toBool(): iterable
+    public static function dataProvider_tryBool(): iterable
     {
         yield '1' => ['expected' => true, 'value' => 1];
         yield '0' => ['expected' => false, 'value' => 0];

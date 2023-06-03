@@ -25,7 +25,10 @@
   "autoload-dev": {
     "psr-4": {
       "Shin1x1\\SafeCast\\Tests\\": "tests/"
-    }
+    },
+    "files": [
+      "src/Functions.php"
+    ]
   },
   "scripts": {
     "php-cs-fixer": "php-cs-fixer fix -v --diff",
