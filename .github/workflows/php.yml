@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   phpunit:
-    name: PHPUnit on ${{ matrix.php }} ${{ matrix.compsoer-flags }}
+    name: PHPUnit on ${{ matrix.php-version }} ${{ matrix.composer-flags }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -27,7 +27,7 @@ jobs:
 
     - uses: shivammathur/setup-php@v2
       with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ matrix.php-version }}
           coverage: pcov
           tools: composer
 
