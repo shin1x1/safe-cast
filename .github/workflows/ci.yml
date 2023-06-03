@@ -1,0 +1,107 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  phpunit:
+    name: PHPUnit on ${{ matrix.php-version }} ${{ matrix.composer-flags }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "8.0"
+          - "8.1"
+          - "8.2"
+        composer-flags:
+          - ""
+          - "--prefer-lowest"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: pcov
+          tools: composer
+
+      - name: Install dependencies
+        run: composer update --no-progress ${{ matrix.composer-flags }}
+
+      - name: Run test suite
+        run: ./vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.0
+          coverage: none
+          tools: composer
+
+      - name: Install dependencies
+        run: composer update --no-progress
+
+      - name: Run php-cs-fixer
+        run: ./vendor/bin/php-cs-fixer fix -v --diff --dry-run
+
+  phpstan:
+    name: PHPStan on ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "8.0"
+          - "8.1"
+          - "8.2"
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer
+
+      - name: Install dependencies
+        run: composer update --no-progress
+
+      - name: Run phpstan
+        run: ./vendor/bin/phpstan analyse
+
+  psalm:
+    name: Psalm on ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "8.0"
+          - "8.1"
+          - "8.2"
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer
+
+      - name: Install dependencies
+        run: composer update --no-progress
+
+      - name: Run phpstan
+        run: ./vendor/bin/psalm --no-progress --output-format=github
+
