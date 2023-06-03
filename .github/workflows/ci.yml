@@ -55,3 +55,28 @@ jobs:
       - name: Run php-cs-fixer
         run: ./vendor/bin/php-cs-fixer fix -v --diff --dry-run
 
+  phpstan:
+    name: PHPStan on ${{ matrix.php-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php-version:
+          - "8.0"
+          - "8.1"
+          - "8.2"
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: none
+          tools: composer
+
+      - name: Install dependencies
+        run: composer update --no-progress
+
+      - name: Run phpstan
+        run: ./vendor/bin/phpstan analyse
+
