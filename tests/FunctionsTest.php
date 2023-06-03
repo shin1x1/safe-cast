@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Shin1x1\SafeCast\Tests;
 
 use PHPUnit\Framework\TestCase;
+
 use function Shin1x1\SafeCast\to_bool;
 use function Shin1x1\SafeCast\to_float;
 use function Shin1x1\SafeCast\to_int;
