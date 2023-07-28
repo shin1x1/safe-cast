@@ -48,8 +48,7 @@ In this example, the `$value` is successfully cast to each type. Note the use of
 
 Use Composer to install SafeCast in your PHP project:
 
-```
-bashCopy code
+```shell
 composer require shin1x1/safecast
 ```
 
