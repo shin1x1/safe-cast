@@ -46,6 +46,8 @@ In this example, the `$value` is successfully cast to each type. Note the use of
 
 ## Installation
 
+[Packagist](https://packagist.org/packages/shin1x1/safe-cast)
+
 Use Composer to install SafeCast in your PHP project:
 
 ```shell
